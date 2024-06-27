@@ -11,6 +11,7 @@
   "author": "",
   "license": "MPL-2.0",
   "devDependencies": {
+    "@types/node": "^20.14.9",
     "tsx": "^4.15.6"
   },
   "dependencies": {
@@ -18,8 +19,8 @@
     "dedent": "^1.5.3",
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
-    "undici": "^6.19.2",
     "jimp": "^0.22.12",
+    "undici": "^6.19.2",
     "webp-converter": "^2.3.3"
   }
 }
