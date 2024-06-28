@@ -31,7 +31,7 @@ export const createModEmbed = async (mod: Mod) => {
             > ${spoilerAdult(mod.summary, mod) ?? 'No summary known'}
             Mod description can be found at ${options.SERVER_URL}/publication/${mod.uid}
         `)
-        .setURL(`https://nexusmods.com/mod/${mod.uid}`)
+        .setURL(`https://nexusmods.com/${mod.domain_name}/mods/${mod.mod_id}`)
         .setAuthor({
             name: mod.uploaded_by + ' (' + mod.author + ')',
             iconURL: `https://avatars.nexusmods.com/${mod.user.member_id}/100`,
