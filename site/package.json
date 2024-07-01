@@ -28,5 +28,6 @@
 		"@libsql/client": "^0.7.0",
 		"sass": "^1.77.6",
 		"undici": "^6.19.2"
-	}
+	},
+    "license": "MPL-2.0"
 }

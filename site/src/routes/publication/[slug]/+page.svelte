@@ -17,7 +17,7 @@
 	    const presetHTML5 = await import('@bbob/preset-html5')
         console.log('Imported bbob!')
         
-        description = bbobHTML.default(data.data.description, presetHTML5.default())
+        description = data.data.description ? bbobHTML.default(data.data.description, presetHTML5.default()) : 'No known description.'
         fileDialogue = document.querySelector('#filetree')
     })
 
@@ -87,7 +87,7 @@
 <main>
     <!-- <h1>{JSON.stringify(data.data, null, 4)}</h1> -->
     <div id="top-title-bar">
-        <a class="title" target="_blank" href={`https://nexusmods.com/${data.data.domain_name}/mods/${data.data.mod_id}`}><h1>{data.data.name}</h1></a>
+        <a class="title" target="_blank" href={`https://nexusmods.com/${data.data.domain_name}/mods/${data.data.mod_id}`}><h1>{data.data.name ?? 'No Known Mod Name'}</h1></a>
         <table id="uploader-author-area">
             <tbody>
                 <tr>
@@ -114,7 +114,7 @@
         <div id="left-section">
             <div id="summary-bit">    
                 <div>
-                    <span>{data.data.summary}</span>
+                    <span>{data.data.summary ?? '???'}</span>
                 </div>
             </div>
             <hr />
@@ -234,7 +234,7 @@
 
         background-color: #43434366;
         
-        pre {
+        kbd {
             font-family: 'JetBrains Mono Variable', monospace;
             font-weight: 200;
         }

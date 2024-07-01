@@ -38,7 +38,7 @@ const checkFunction = async () => {
 
     for (const id of IDsToCheck) {
         const mod = await getMod(options.gameName!, id)
-        console.log(mod)
+        // console.log(mod)
         mods.push(mod)
     }
 
@@ -59,7 +59,13 @@ const checkFunction = async () => {
     for (const embeds of subarrays) 
         webhook.sendWebhook({ embeds, files });
     
-    fs.writeFileSync('latest.txt', (mods.sort((a, b) => a.mod_id - b.mod_id).shift()?.mod_id ?? '-1').toString())
+    let newLatest = Number(mods.sort((a, b) => a.mod_id - b.mod_id).shift()?.mod_id ?? '-1')
+    if (newLatest > currentMaxCount) // if it's signifcantly lower, things will break and APIs will be spammed (this is bad)
+    {
+        fs.writeFileSync('latest.txt', newLatest.toString())
+        currentMaxCount = newLatest
+    }
+    
 
 }
 

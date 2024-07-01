@@ -24,6 +24,8 @@ export const humanReadableStatus = (status: ModStatus) => {
 export const createModEmbed = async (mod: Mod) => {
     let file: AttachmentBuilder | undefined = undefined
 
+    console.log(mod.user)
+
     const embed = new EmbedBuilder()
         .setColor(options.EMBED_COLOUR)
         .setTitle(`New Mod Uploaded - ${mod.name ?? '???'}`)
