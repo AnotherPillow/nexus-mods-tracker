@@ -65,3 +65,8 @@ export const threeJimpRead = (url: string) => {
         }
     }
 }
+
+export const splitArray = (array, size = 10) =>
+    array.reduce((acc, _, i) =>
+        i % size === 0 ? [...acc, array.slice(i, i + size)] : acc, []
+    );

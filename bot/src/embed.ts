@@ -29,7 +29,7 @@ export const createModEmbed = async (mod: Mod) => {
         .setTitle(`New Mod Uploaded - ${mod.name ?? '???'}`)
         .setDescription(dedent`
             > ${spoilerAdult(mod.summary, mod) ?? 'No summary known'}
-            Mod description can be found at ${options.SERVER_URL}/publication/${mod.uid}
+            Mod description, files, virustotal and more can be found at ${options.SERVER_URL}/publication/${mod.uid}
         `)
         .setURL(`https://nexusmods.com/${mod.domain_name}/mods/${mod.mod_id}`)
         .setAuthor({

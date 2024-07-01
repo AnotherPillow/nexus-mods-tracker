@@ -36,3 +36,12 @@ export const getFilesForMod = async (domain: string, id: string | number) => {
     return files
 
 }
+
+export const getMod = async (domain: string, id: string | number) => {
+    const url = `https://api.nexusmods.com/v1/games/${domain}/mods/${id}.json`
+
+    const { body } = await request(url, {
+        headers: normalHeaders,
+    })
+    return await body.json() as Mod
+}

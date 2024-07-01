@@ -13,6 +13,7 @@ export class Database {
     }
 
     async addModToDatabase(mod: Mod) {
+
         const modFiles = await getFilesForMod(mod.domain_name, mod.mod_id)
         const modFilesString = Buffer.from(
             JSON.stringify(modFiles)
@@ -39,6 +40,8 @@ export class Database {
             uploaded_users_profile_url: mod.uploaded_users_profile_url,
             //@ts-ignore - It's unreadable but cool ig 
             contains_adult_content: mod.contains_adult_content & 1,
+            status: mod.status,
+            author_id: mod.user.member_id,
             filesB64: modFilesString
         }
 
@@ -77,5 +80,15 @@ export class Database {
         } catch (error) {
             return -1
         }
+    }
+
+    async checkIfUIDExists(uid: number) {
+        if (uid == undefined) return false
+
+        const result = await this.client.execute({
+            sql: `SELECT 1 FROM mods WHERE uid = @uid`,
+            args: { uid }
+        })
+        return result.rows.length != 0
     }
 }
