@@ -13,7 +13,7 @@ export const numsInRangeEx = (start: number, end: number) => {
 
 export const spoilerAdult = (text: string | undefined | null, mod: Mod) => {
     if (!text) return ''
-    if (mod.contains_adult_content) text = `||${text}||`
+    if ((mod as any)?.contains_adult_content) text = `||${text}||`
     return text
 }
 
