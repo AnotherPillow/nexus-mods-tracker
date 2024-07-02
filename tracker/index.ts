@@ -8,6 +8,7 @@ import { createModEmbed } from './src/embed';
 import { numsInRangeEx, splitArray } from './src/util';
 import webhook from './src/webhook'
 import * as options from './src/options'
+import { Mod, SuccessfulMod } from './src/types';
 
 
 /*(async function() {
@@ -26,8 +27,8 @@ const time = 30 * 60 * 1000 // 30 mins
 const checkFunction = async () => {
     const db = new Database()
     
-    const mods = await getLatestMods()
-    const latestIDs = mods.map(mod => mod.mod_id)
+    const mods = await getLatestMods() as SuccessfulMod[]
+    const latestIDs = mods.map(mod => mod.mod_id ?? 999999999)
     
     const lowestInLatest = Math.min(...latestIDs ?? currentMaxCount)
 
@@ -39,7 +40,7 @@ const checkFunction = async () => {
     for (const id of IDsToCheck) {
         const mod = await getMod(options.gameName!, id)
         // console.log(mod)
-        mods.push(mod)
+        mods.push(mod as SuccessfulMod)
     }
 
     const embeds: EmbedBuilder[] = []
@@ -47,10 +48,14 @@ const checkFunction = async () => {
     for (const mod of mods) {
         if (await db.checkIfUIDExists(mod.uid)) continue
 
-        const { embed, file } = await createModEmbed(mod)
+        const modEmbed = await createModEmbed(mod)
+        if (!modEmbed) continue
+        
+        const { embed, file } = modEmbed
         embeds.push(embed)
         if (file) files.push(file)
         db.addModToDatabase(mod)
+        
         
     }
 
@@ -59,12 +64,9 @@ const checkFunction = async () => {
     for (const embeds of subarrays) 
         webhook.sendWebhook({ embeds, files });
     
-    let newLatest = Number(mods.sort((a, b) => a.mod_id - b.mod_id).shift()?.mod_id ?? '-1')
-    if (newLatest > currentMaxCount) // if it's signifcantly lower, things will break and APIs will be spammed (this is bad)
-    {
-        fs.writeFileSync('latest.txt', newLatest.toString())
-        currentMaxCount = newLatest
-    }
+    // let newLatest = Number(mods.sort((a, b) => a.mod_id - b.mod_id).shift()?.mod_id ?? '-1') // get the lowest mod_id in mods
+    let newLatest = currentMaxCount = Number(mods.sort((a, b) => a.mod_id ?? 0 - b.mod_id ?? 0).shift()?.mod_id ?? '-1') // get highest mod_id in mods
+    fs.writeFileSync('latest.txt', newLatest.toString())
     
 
 }

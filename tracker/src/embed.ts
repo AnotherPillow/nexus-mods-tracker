@@ -3,7 +3,7 @@ import dedent from "dedent";
 import Jimp from "jimp";
 
 import * as options from './options'
-import { Mod, ModStatus } from "./types";
+import { Mod, ModStatus, SuccessfulMod } from "./types";
 import { spoilerAdult, threeJimpRead } from "./util";
 
 export const humanReadableStatus = (status: ModStatus) => {
@@ -24,7 +24,11 @@ export const humanReadableStatus = (status: ModStatus) => {
 export const createModEmbed = async (mod: Mod) => {
     let file: AttachmentBuilder | undefined = undefined
 
-    console.log(mod.user)
+    if ('error' in mod) { // still feels weird to do this but I know it works??
+        return
+    } else {
+        mod = mod as SuccessfulMod
+    }
 
     const embed = new EmbedBuilder()
         .setColor(options.EMBED_COLOUR)

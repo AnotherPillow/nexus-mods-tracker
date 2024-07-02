@@ -1,6 +1,6 @@
 export type ModStatus = 'published' | 'removed' | 'wastebinned' | 'not_published'
 // Yes I wrote this myself
-export interface Mod {
+export interface SuccessfulMod {
     name?: string,
     summary?: string,
     description?: string,
@@ -36,6 +36,12 @@ export interface Mod {
         version: null | number
     }
 }
+
+export type ModError = {
+    error: string
+}
+
+export type Mod = SuccessfulMod | ModError
 
 // I typed this out impressively fast, wow.
 export interface ModFile {
