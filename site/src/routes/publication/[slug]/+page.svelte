@@ -253,6 +253,13 @@
             color: white;
             border-radius: 1em;
 
+            overflow: scroll;
+            scrollbar-width: none;
+
+            ::-webkit-scrollbar {
+                display: none;
+            }
+
             #file-preview-etc-table {
                 margin: 0 5%;
                 &, tbody, tr, th, td {
