@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5"
+  }
 }
