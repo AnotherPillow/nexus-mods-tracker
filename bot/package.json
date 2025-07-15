@@ -10,7 +10,15 @@
   "author": "",
   "license": "MPL-2.0",
   "dependencies": {
+    "@nexusmods/nexus-api": "^1.1.5",
+    "@types/node": "^24.0.13",
+    "dedent": "^1.6.0",
     "discord.js": "^14.15.3",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "fflate": "^0.8.2",
+    "json5": "^2.2.3"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.18"
   }
 }

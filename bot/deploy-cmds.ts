@@ -5,6 +5,10 @@ const flagcmd = new ContextMenuCommandBuilder()
 	.setName('Flag Mod')
 	.setType(ApplicationCommandType.Message);
 
+const checkmalicious = new ContextMenuCommandBuilder()
+	.setName('Check Malicious')
+	.setType(ApplicationCommandType.Message);
+
 const rest = new REST().setToken(process.env.BOT_TOKEN!);
 
 // and deploy your commands!
@@ -16,7 +20,8 @@ const rest = new REST().setToken(process.env.BOT_TOKEN!);
 		const data = await rest.put(
 			Routes.applicationGuildCommands(process.env.CLIENT_ID!, process.env.SERVER_ID!),
 			{ body: [
-                flagcmd.toJSON()
+                flagcmd.toJSON(),
+                checkmalicious.toJSON()
             ] },
 		);
 
